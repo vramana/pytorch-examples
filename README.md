@@ -25,3 +25,13 @@ Flags of interest:
 - `--use-ffn`: profile or train the simple feedforward model instead of the ConvNet.
 - `--batch-size`: override MNIST loader batch size.
 - `--lr`: adjust the optimizer learning rate.
+
+Setup:
+
+```
+git clone https://github.com/vramana/pytorch-examples.git
+cd pytorch-examples/
+uv sync
+uv run --with jupyter jupyter lab --allow-root --no-browser --NotebookApp.token=''
+
+```
