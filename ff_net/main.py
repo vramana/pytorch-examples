@@ -7,9 +7,7 @@ import torchvision
 import torchvision.transforms as transforms
 from torch.profiler import ProfilerActivity, profile, tensorboard_trace_handler
 
-
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.mps.is_available() else "cpu")
-
 
 class FeedforwardNet(nn.Module):
     def __init__(self, input_size, hidden_size, num_classes):
