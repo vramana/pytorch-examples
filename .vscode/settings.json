@@ -1,0 +1,12 @@
+{
+  // Python extension settings
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+
+  // Jupyter extension settings
+  "jupyter.notebookFileRoot": "${workspaceFolder}",
+
+  // Remote SSH - recommend extensions (note: automatic installation requires user-level settings)
+  // To enable automatic installation, add to your user settings.json:
+  "remote.SSH.defaultExtensions": ["ms-python.python", "ms-toolsai.jupyter"]
+}
