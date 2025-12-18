@@ -35,3 +35,7 @@ uv sync
 uv run --with jupyter jupyter lab --allow-root --no-browser --NotebookApp.token=''
 
 ```
+
+**Stanford Courses**:
+
+- [Stanford CS231N Deep Learning for Computer Vision 2025](https://www.youtube.com/watch?v=25zD5qJHYsk&list=PLoROMvodv4rOmsNzYBMe0gJY2XS8AQg16&index=4)
