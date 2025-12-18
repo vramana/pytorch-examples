@@ -5,6 +5,9 @@ from torchvision.transforms import v2
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.mps.is_available() else "cpu")
 
+
+CIFAR_10_CLASS_NAMES = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+
 cifar10_mean = (0.4914, 0.4822, 0.4465)
 cifar10_std = (0.2470, 0.2435, 0.2616)
 cifar100_mean = (0.5071, 0.4867, 0.4408)
@@ -129,7 +132,7 @@ def train(model, criterion, optimizer, scheduler, train_loader, num_epochs: int,
 
 
 @torch.no_grad()
-def evaluate(model, test_loader, per_class_accuracy: bool = False):
+def evaluate(model, test_loader, per_class_accuracy: bool = False, num_classes: int = 10):
     """Evaluate the model on test data.
     
     Args:
@@ -140,7 +143,7 @@ def evaluate(model, test_loader, per_class_accuracy: bool = False):
     model.eval()
     correct = 0
     total = 0
-    count_correct_per_class = [0] * 10
+    count_correct_per_class = [0] * num_classes
     
     for images, labels in test_loader:
         images = images.to(DEVICE)
@@ -159,7 +162,7 @@ def evaluate(model, test_loader, per_class_accuracy: bool = False):
     print(f"Accuracy of the network on the 10000 test images: {accuracy:.2f} %")
     
     if per_class_accuracy:
-        for i in range(10):
+        for i in range(num_classes):
             print(f"Class wise accuracy for class {i}: {100 * count_correct_per_class[i] / (total / 10):.2f} %")
     
     return accuracy
