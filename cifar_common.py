@@ -5,6 +5,10 @@ from torchvision.transforms import v2
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.mps.is_available() else "cpu")
 
+cifar10_mean = (0.4914, 0.4822, 0.4465)
+cifar10_std = (0.2470, 0.2435, 0.2616)
+cifar100_mean = (0.5071, 0.4867, 0.4408)
+cifar100_std = (0.2675, 0.2565, 0.2761)
 
 def get_data(batch_size: int, num_workers: int = 4, prefetch_factor: int = 4, normalize_test: bool = True):
     """Load CIFAR-10 dataset with data augmentation.
@@ -21,10 +25,7 @@ def get_data(batch_size: int, num_workers: int = 4, prefetch_factor: int = 4, no
         v2.RandomRotation(5),
         v2.ToImage(),
         v2.ToDtype(torch.float32, scale=True),
-        v2.Normalize(
-            mean=(0.4914, 0.4822, 0.4465),
-            std=(0.2470, 0.2435, 0.2616),
-        ),
+        v2.Normalize(cifar10_mean, cifar10_std),
         v2.RandomErasing(p=0.5, scale=(0.02, 0.15), ratio=(0.3, 3.3)),
     ])
     
@@ -35,10 +36,7 @@ def get_data(batch_size: int, num_workers: int = 4, prefetch_factor: int = 4, no
     
     if normalize_test:
         test_transform_list.append(
-            v2.Normalize(
-                mean=(0.4914, 0.4822, 0.4465),
-                std=(0.2470, 0.2435, 0.2616),
-            )
+            v2.Normalize(cifar10_mean, cifar10_std)
         )
     
     test_transform = v2.Compose(test_transform_list)
